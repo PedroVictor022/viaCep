@@ -1,23 +1,13 @@
-async function searchCepFN(cepData) {
-   try {
-      let searchCep = await fetch(`https://viacep.com.br/ws/${cepData}/json/`)
-      // Toda resposta que chega, e do tipo response
+// `https://viacep.com.br/ws/${cepData}/json/`
 
-      // Converte os dados que sao retornados em bytes
-      let conversionJson = await searchCep.json()
+let input_value = document.getElementById('inpt-value');
 
-      if (conversionJson.erro) {
-         throw Error('Adress does not exist');
-      }
+function searchCep() {
+   
+   if(input_value.value == "" | 0) {
+      console.log('Campo está invalido!')
+   } else {
+      console.log(`${input_value.value}`)
+   }
 
-      console.log(conversionJson);
-      return conversionJson;
-
-   } catch (erro) {
-      console.log(erro);
-   } 
 }
-
-const ceps = ['35700284', '35700263', '35700212' ]
-const conjunto = ceps.map( values => searchCepFN(values))
-Promise.all(conjunto).then(res => console.log(res))
