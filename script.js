@@ -1,16 +1,29 @@
 // `https://viacep.com.br/ws/${cepData}/json/`
 
-let input_value = document.getElementById('inpt-value');
+function searchCEP() {
+  let cep = document.querySelector("#cep").value;
 
-function searchCep() {
-   console.log(input_value.length)
+   if(cep.length !== 8) {
+      console.log('Cep invalido');
+      // Mensagem de erro
+   } 
    
-   if(input_value.value < 0) {
-      console.log('Campo está invalido!')
-   } else {
-      console.log(`${input_value.value}`)
-   }
-
+   // CEP API
+   const url = `https://viacep.com.br/ws/${cep}/json/`
+   fetch(url)
+      .then(res => res.json())
+      .then(data => {
+         console.log(data)
+         showResults(data)
+      })
 }
 
-// Rever o conteudo acima
+function showResults(data) {
+   const elSelect = document.querySelector('.resultados')
+   const innerResults = `
+      <h2>CEP: ${data.cep}</h2>
+      <p>Endereço: ${data.logradouro}</p>
+      <p>Cidade: ${data.localidade} - ${data.uf}</p>
+   `
+   elSelect.innerHTML = innerResults
+}
