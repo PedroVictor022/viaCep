@@ -21,11 +21,9 @@ function searchCEP() {
 function showResults(data) {
    const elSelect = document.querySelector('.resultados')
    const innerResults = `
-      <div>
          <h2>CEP: ${data.cep}</h2>
          <p>Endereço: ${data.logradouro}</p>
          <p>Cidade: ${data.localidade} - ${data.uf}</p>  
-      </div>
    `
    elSelect.innerHTML = innerResults
 }
